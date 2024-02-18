@@ -1,6 +1,8 @@
 Final Project - Interactive Data Visualization  
 ===
 
+link to process book in onedrive: https://wpi0-my.sharepoint.com/:w:/r/personal/rjdillon_wpi_edu/_layouts/15/Doc.aspx?sourcedoc=%7B5E808DEA-D71D-437D-B776-F54C0EA36EF9%7D&file=CS4804%20Final%20Project%20-%20Process%20Book.docx&action=default&mobileredirect=true
+
 Final Project Materials
 ---
 For your final project you must hand in the following items.
@@ -62,8 +64,3 @@ Store the following in your GitHub repository:
 - Process Book- Your Process Book in PDF format.
 - README - The README file must give an overview of what you are handing in: which parts are your code, which parts are libraries, and so on. The README must contain URLs to your project websites and screencast videos. The README must also explain any non-obvious features of your interface.
 Your individual project score will also be influenced by your peer evaluations.
-
-References
----
-
-- This final project is adapted from https://www.dataviscourse.net/2020/project/

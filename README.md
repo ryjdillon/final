@@ -1,23 +1,6 @@
 Final Project - Interactive Data Visualization  
 ===
 
-The key learning experience of this course is the final project. 
-You will design a web site and interactive visualizations that answer questions you have, provide an exploratory interface to some topic of your own choosing, or take on a more ambitious experiment than A3. 
-You will acquire the data, design your visualizations, implement them, and critically evaluate the results. 
-
-The path to a good visualization is going to involve mistakes and wrong turns. 
-It is therefore important to recognize that mistakes are valuable in finding the path to a solution, to broadly explore the design space, and to iterate designs to improve possible solutions. 
-To help you explore the design space, we will hold events such as feedback sessions in which you propose your idea and initial designs and receive feedback from the class and staff.
-
-Proposals / Idea Generation
----
-
-Submit project ideas using [this Google Form](https://docs.google.com/forms/d/e/1FAIpQLSc72vId8keotkEvLrB9Ef3Nt0e1uh_-mWmQ5okyPM5_q2a89Q/viewform?usp=sf_link).
-
-You're encouraged to submit many ideas-- staff will help you identify the most promising ones and possible roadblocks.
-
-Please stick to 1-4 folks per team.
-
 Final Project Materials
 ---
 For your final project you must hand in the following items.
@@ -69,28 +52,6 @@ What do you feel is the best part of your project?
 What insights did you gain? 
 What is the single most important thing you would like your audience to take away? Make sure it is front and center rather than at the end.
 
-Outside Libraries/References
----
-
-For this project you *do not* have to write everything from scratch.
-
-You may *reference* demo programs from books or the web, and *include* popular web libraries like Material UI, React, Svelte, etcetera. 
-
-Please *do not* use libraries on top of d3 without consulting staff, however. 
-Libraries like nvd3.js look tempting, but such libraries often have poor defaults and result in poor visualizations.
-There may be exceptions.
-Instead, draw from the numerous existing d3 examples on the web.
-
-If you use outside sources please provide a References section with links at the end of your Readme.
-
-Resources
----
-The "[Data is Plural](https://tinyletter.com/data-is-plural/archive)" weekly letter often contains interesting datasets.
-
-KAGGLE IS BANNED! You may propose to use a dataset from there if you really have a deep/cool idea, but please run it by me first.
-
-Think of something you're interested in, go find data on it! Include data collection and processing as part of your work on this project.
-
 Requirements
 ---
 
@@ -100,23 +61,6 @@ Store the following in your GitHub repository:
 - Data - Include all the data that you used in your project. If the data is too large for github store it on a cloud storage provider, such as Dropbox or Yousendit.
 - Process Book- Your Process Book in PDF format.
 - README - The README file must give an overview of what you are handing in: which parts are your code, which parts are libraries, and so on. The README must contain URLs to your project websites and screencast videos. The README must also explain any non-obvious features of your interface.
-
-GitHub Details
----
-
-- Fork the repo. You now have a copy associated with your username.
-- Make changes to index.html to fulfill the project requirements. 
-- Make sure your "main" branch matches your "gh-pages" branch. See the GitHub Guides referenced above if you need help.
-- Edit the README.md with a link to your gh-pages or other external site: for example http://YourUsernameGoesHere.github.io/DataVisFinal/index.html
-- To submit, make a [Pull Request](https://help.github.com/articles/using-pull-requests/) on the original repository.
-
-Grading
----
-
-- Process Book - Are you following a design process that is well documented in your process book?
-- Solution - Is your visualization effective in answering your intended questions? Was it designed following visualization principles?
-- Implementation - What is the quality of your implementation? Is it appropriately polished, robust, and reliable?
-- Presentation - Are your web site and screencast clear, engaging, and effective?
 Your individual project score will also be influenced by your peer evaluations.
 
 References

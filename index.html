@@ -24,11 +24,19 @@
             }  
 
             .flex-child:first-child {
-                margin-right: 20px;
+                margin-right: 2px;
             } 
 
-            button {
+            p {
+                font-family:'Segoe UI', Geneva;
+            }
+
+            p:first-child {
                 margin-top: 50px;
+            }
+
+            button {
+                margin-top: 1px;
             }
         </style>
     </head>
@@ -39,10 +47,13 @@
             
             </div>
             <div id="options" class="flex-child">
-                <button id="sort">sort data</button>
-                <button id="unsort">unsort data</button>
+                <p>sort data in descending order</p>
+                <button id="sort">sort</button>
+                <p>unsort data to original order</p>
+                <button id="unsort">unsort</button>
                 <br>
                 <br>
+                <p>select year</p>
                 <select id="selectYear">
                     <option>all</option>
                     <option>2010</option>
@@ -61,8 +72,8 @@
 
         <script>
             console.log(d3); // test if d3 is loaded
-            var margin = {top: 30, left: 100, bottom: 50, right: 50};
-            var width = 1000 - margin.left - margin.right; 
+            var margin = {top: 50, left: 100, bottom: 80, right: 50};
+            var width = 1325 - margin.left - margin.right; 
             var height = 1500 - margin.top - margin.bottom;
 
             const svg = d3.select("div#visualization")
@@ -87,7 +98,11 @@
                 const grouped_data = d3.rollups(data, v => d3.sum(v, d => d.Cheetahs), d => d.Country);
                 const grouped_data_year = d3.rollups(data, v => d3.sum(v, d => d.Cheetahs), d => d.Country, d => d.Year);
 
-                var current_data = [...grouped_data];
+                const filtered_grouped_data = grouped_data.filter(function (d) {
+                    return d[1] > 0;
+                })
+
+                var current_data = [...filtered_grouped_data];
 
                 // x axis
                 var xScale = d3.scaleLinear()
@@ -98,22 +113,32 @@
                     .call(d3.axisBottom(xScale))
                     .selectAll("text")
                     .attr("transform", "translate(-10,0)rotate(-45)")
+                    .attr("font-family", 'Segoe UI')
                     .style("text-anchor", "end");
+                svg.append("g")
+                    .attr("transform", "translate(0," + 0 + ")")
+                    .call(d3.axisTop(xScale))
+                    .selectAll("text")
+                    .attr("transform", "translate(-10,0)rotate(45)")
+                    .attr("font-family", 'Segoe UI')
+                    .style("text-anchor", "end");
+
 
                 // y axis
                 var yScale = d3.scaleBand()
                     .range([ 0, height ])
-                    .domain(grouped_data.map(function(d) {return d[0];}))
+                    .domain(current_data.map(function(d) {return d[0];}))
                     .padding(.1);
                 svg.append("g")
                     .call(d3.axisLeft(yScale))
                     .attr('class', 'y-axis')
+                    .attr("font-family", 'Segoe UI')
 
                 var axisLeft = d3.axisLeft(yScale).tickFormat(function(d) {return d; });
 
                 // bars
                 svg.selectAll("myRect")
-                    .data(grouped_data)
+                    .data(filtered_grouped_data)
                     .enter()
                     .append("rect")
                     .attr("class","bar")
@@ -141,7 +166,8 @@
                 svg.append("text")
                     .attr("text-anchor", "end")
                     .attr("x", width/2 + margin.left)
-                    .attr("y", height + margin.top + 20)
+                    .attr("y", height + margin.top + 10)
+                    .attr("font-family", 'Segoe UI')
                     .text("# of cheetahs");
 
                 // y axis label:
@@ -150,6 +176,7 @@
                     .attr("transform", "rotate(-90)")
                     .attr("y", -margin.left + 20)
                     .attr("x", -margin.top - height/2 + 20)
+                    .attr("font-family", 'Segoe UI')
                     .text("country")
 
                 d3.selectAll(".y-axis text")
@@ -206,10 +233,10 @@
 
                         function changeYear() {
                             var selectedYear = this.options[this.selectedIndex].value;
-                            console.log(selectedYear);
+                            //console.log(selectedYear);
 
                             if (selectedYear == "all") {
-                                current_data = [...grouped_data];
+                                current_data = [...filtered_grouped_data];
                                 // move bars
                                 svg.selectAll(".bar")
                                         .data(current_data)
@@ -230,7 +257,10 @@
                                     return [d[0], num];
                                 }); 
 
-                                console.log(new_data);
+                                filtered_new_data = new_data.filter(function(d) {
+                                    return d[1] > 0;
+                                });
+                                
                                 current_data = [...new_data];
 
                                 // move bars

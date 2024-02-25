@@ -115,6 +115,15 @@
                         <option>2018</option>
                         <option>2019</option>
                     </select>
+                    <br>
+                    <br>
+                    <p>select incident type</p>
+                    <select id="selectType">
+                        <option>all</option>
+                        <option>possession/trade</option>
+                        <option>possession/transfer</option>
+                        <option>seizure</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -167,6 +176,9 @@
             let data = d3.csv("data/Tricorache et al_Global trade dataset for cheetah.csv", d3.autoType).then(function(data) {
                 const grouped_data = d3.rollups(data, v => d3.sum(v, d => d.Cheetahs), d => d.Country);
                 const grouped_data_year = d3.rollups(data, v => d3.sum(v, d => d.Cheetahs), d => d.Country, d => d.Year);
+                const grouped_data_type = d3.rollups(data, v => d3.sum(v, d => d.Cheetahs), d=> d.Country, d => d.Incident_Type);
+
+                //console.log(grouped_data_type);
 
                 const filtered_grouped_data = grouped_data.filter(function (d) {
                     return d[1] > 0;
@@ -262,7 +274,7 @@
                     }).reverse();
                             
                     yScale.domain(sorted_data.map(function(d) {
-                        console.log(d);
+                        //console.log(d);
                         return d[0];
                     })); 
                             
@@ -302,7 +314,8 @@
                         .call(axisLeft);	    
                 });
 
-                d3.select("#selectYear").on("change", changeYear)
+                d3.select("#selectYear").on("change", changeYear);
+                d3.select("#selectType").on("change", changeType)
 
                 function changeYear() {
                     var selectedYear = this.options[this.selectedIndex].value;
@@ -310,6 +323,9 @@
 
                     if (selectedYear == "all") {
                         current_data = [...filtered_grouped_data];
+
+                        document.getElementById("selectType").disabled = false;
+
                         xScale.domain([0, (d3.max(current_data, d => d[1])*1.05)]);
 
                         svg.select('g.x-axis1')
@@ -340,7 +356,7 @@
 
                     else {
                         const copied_year_data = [...grouped_data_year];
-                        console.log(copied_year_data);
+                        //console.log(copied_year_data);
                         var new_data = copied_year_data.map(function(d) {
                             var num = 0;
                             for(var i=0; i<d[1].length; i++) {
@@ -350,10 +366,108 @@
                             }
                             return [d[0], num];
                         }); 
-
-                        console.log
                                 
                         current_data = [...new_data];
+
+                        document.getElementById("selectType").disabled = true;
+
+                        xScale.domain([0, (d3.max(current_data, d => d[1])*1.05)]);
+
+                        svg.select('g.x-axis1')
+                            .transition()
+                            .duration(500)
+                            .call(d3.axisBottom(xScale))
+                            .selectAll("text")
+                            .attr("transform", "translate(-10,0)rotate(-45)")
+                            .attr("font-family", 'Segoe UI')
+                            .style("text-anchor", "end");
+
+                        svg.select('g.x-axis2')
+                            .transition()
+                            .duration(500)
+                            .call(d3.axisTop(xScale))
+                            .selectAll("text")
+                            .attr("transform", "translate(-10,0)rotate(45)")
+                            .attr("font-family", 'Segoe UI')
+                            .style("text-anchor", "end");
+
+                        // move bars
+                        svg.selectAll(".bar")
+                            .data(current_data)
+                            .transition()
+                            .duration(500)
+                            .attr("width", function(d) { return xScale(d[1]);});
+                    }
+                }
+
+
+                function changeType() {
+                    var selectedType = this.options[this.selectedIndex].value;
+                    //console.log(selectedYear);
+
+                    if (selectedType == "all") {
+                        current_data = [...filtered_grouped_data];
+
+                        document.getElementById("selectYear").disabled = false;
+
+                        xScale.domain([0, (d3.max(current_data, d => d[1])*1.05)]);
+
+                        svg.select('g.x-axis1')
+                            .transition()
+                            .duration(500)
+                            .call(d3.axisBottom(xScale))
+                            .selectAll("text")
+                            .attr("transform", "translate(-10,0)rotate(-45)")
+                            .attr("font-family", 'Segoe UI')
+                            .style("text-anchor", "end");
+
+                        svg.select('g.x-axis2')
+                            .transition()
+                            .duration(500)
+                            .call(d3.axisTop(xScale))
+                            .selectAll("text")
+                            .attr("transform", "translate(-10,0)rotate(45)")
+                            .attr("font-family", 'Segoe UI')
+                            .style("text-anchor", "end");
+                                
+                        // move bars
+                        svg.selectAll(".bar")
+                            .data(current_data)
+                            .transition()
+                            .duration(500)
+                            .attr("width", function(d) { return xScale(d[1]);});
+                        }
+
+                    else {
+                        var type = "";
+                        if (selectedType == "possession/trade") {
+                            type = "Possession/trade";
+                        }
+                        else if (selectedType == "possession/transfer") {
+                            type = "Possession/transfer";
+                        }
+                        else if (selectedType == "seizure") {
+                            type = "Seizure";
+                        }
+
+                        const copied_type_data = [...grouped_data_type];
+                        console.log(copied_type_data);
+                        var new_data = copied_type_data.map(function(d) {
+                            var num = 0;
+                            for(var i=0; i<d[1].length; i++) {
+                                //console.log(d[1][i]);
+                                if (d[1][i][0] == type) {
+                                    //console.log(d[1][i][1]);
+                                    num = d[1][i][1];
+                                }
+                            }
+                            return [d[0], num];
+                        });
+
+                        current_data = [...new_data];
+                        console.log(current_data);
+
+                        document.getElementById("selectYear").disabled = true;
 
                         xScale.domain([0, (d3.max(current_data, d => d[1])*1.05)]);
 

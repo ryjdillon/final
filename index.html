@@ -73,7 +73,7 @@
 
             /* Add an active class to highlight the current page */
             .topnav a.active {
-            background-color: brown;
+            background-color: #724820;
             color: white;
             }
 
@@ -167,7 +167,7 @@
                 .attr("y",0)
                 .attr("height", height)
                 .attr("width", width)
-                .style("fill", "tan")
+                .style("fill", "#E3AD63")
 
             var div = d3.select("div#visualization").append("div")
                 .attr("class", "tooltip")
@@ -231,7 +231,7 @@
                     .attr("y", function(d) { return yScale(d[0]); })
                     .attr("width", function(d) { return xScale(d[1]); })
                     .attr("height", yScale.bandwidth() )
-                    .attr("fill", "brown")
+                    .attr("fill", "#724820")
                     .on("mouseover", function(event,d) {
                         //console.log(d);
                         div.transition()

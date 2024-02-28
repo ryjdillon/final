@@ -32,6 +32,14 @@
                 font-family:'Segoe UI', Geneva;
             }
 
+            h1 {
+                font-family:'Segoe UI', Geneva;
+            }
+
+            h3 {
+                font-family:'Segoe UI', Geneva;
+            }
+
             p:first-child {
                 margin-top: 50px;
             }
@@ -80,6 +88,11 @@
             /* Hide the link that should open and close the topnav on small screens */
             .topnav .icon {
             display: none;
+            }
+
+            .padded {
+                padding-right: 8px;
+                padding-left: 8px;
             }
         </style>
     </head>
@@ -133,6 +146,36 @@
                 <a href="#vis" onClick="return showVis();">visualization</a>
                 <a href="#details" class="active" onClick="return showDetails();">details</a>
             </div>
+            <h1 class="padded">Visualizing Illegal Cheetah Trade and Seizure</h1>
+            <p class="padded">
+                Utilizing a global dataset created to document the illegal trade and seizure of cheetahs between the years 2010 and 2019,
+                this visualization aims to summarize the data from these incidents in an interactive way. Our group implemented a
+                filterable and sortable horizontal bar chart with the goal of showing the number of cheetahs involved in incidents, organized by location (specifically the country). 
+                <br>
+                <br>
+                Since the dataset contained information on individual and contained incidents, this summarative visualization allows the user to see
+                where, when, and what type of incidents that the greatest number of cheetahs were involved in. 
+                <br>
+                <br>
+                -  Saudi Arabia, by far, saw the most number of cheetahs involved in incidents over the total timeframe (1559), of which 1504 were possession/trade incidents. 
+                <br>
+                -  However, until 2013, countries like Kenya, the UAE, and Somaliland outranked Saudi Arabia in number of cheetahs involved in incidents. 
+                <br>
+                -  Only two countries (UAE and Egypt) had occurrences of possession/transfer incidents. 
+                <br>
+                -  Kenya had the highest number of cheetahs involved in seizure incidents (284), as well as the highest overall numbers 
+                in 2010 and 2011.
+                <br>
+                <br>
+                By the use of this visualization, it is our hope that the issue of poaching and illegal seizure of cheetahs in different locations
+                can be examined more in depth over the selected timeframe of the dataset.
+            </p>
+            <h3 class="padded">dataset information:</h3>
+            <p class="padded"><a href="https://www.sciencedirect.com/science/article/pii/S2352340921001323">article</a></p>
+            <p class="padded"><a href="https://data.mendeley.com/datasets/84k92j4n3y/2">dataset source</a></p>
+            <h3 class="padded">process book & narrative video:</h3>
+            <p class="padded"><a href="/">book</a></p>
+            <p class="padded"><a href="/">video</a></p>
         </div>
         
 

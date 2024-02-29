@@ -49,7 +49,7 @@
 
             /* Add a black background color to the top navigation */
             .topnav {
-            background-color: #E3AD63;
+            background-color:#E3AD63;
             overflow: hidden;
             }
 
@@ -57,7 +57,7 @@
             .topnav a {
             float: left;
             display: block;
-            color: #724820;
+            color:#724820;
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
@@ -67,14 +67,14 @@
 
             /* Change the color of links on hover */
             .topnav a:hover {
-            background-color: white;
-            color: black;
+            background-color:#724820;
+            color:#E3AD63 ;
             }
 
             /* Add an active class to highlight the current page */
             .topnav a.active {
-            background-color: #724820;
-            color: white;
+            background-color:#724820;
+            color:#E3AD63;
             }
 
             /* Hide the link that should open and close the topnav on small screens */
@@ -222,7 +222,22 @@
                 var axisLeft = d3.axisLeft(yScale).tickFormat(function(d) {return d; });
 
                 // bars
-                svg.selectAll("myRect")
+                 var defs = svg.append('svg:defs');
+
+                defs.append('svg:pattern')
+                .attr('id', 'cheetahprint')
+                .attr("width", 612)
+                .attr("height", 612)
+                .attr("patternUnits", "userSpaceOnUse")
+                .append('svg:image')
+                .attr("xlink:href", "https://media.istockphoto.com/id/1313630388/vector/vector-seamless-pattern-of-leopard-or-ounce-predatory-print.jpg?s=612x612&w=0&k=20&c=-lSnZFVY2ccPzyMyO0KzGO483fTotNMtlnbxPTvwx3o=")
+                .attr("width", 612)
+                .attr("height", 612)
+                .attr("x", 0)
+                .attr("y", 0);  
+
+
+                svg.selectAll(".bar")
                     .data(filtered_grouped_data)
                     .enter()
                     .append("rect")
@@ -231,7 +246,10 @@
                     .attr("y", function(d) { return yScale(d[0]); })
                     .attr("width", function(d) { return xScale(d[1]); })
                     .attr("height", yScale.bandwidth() )
-                    .attr("fill", "#724820")
+                    .style("fill", "url(#cheetahprint)")
+                    .style("stroke", "#724820")
+                    .style("stroke-width", 1)
+
                     .on("mouseover", function(event,d) {
                         //console.log(d);
                         div.transition()
